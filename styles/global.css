@@ -4,9 +4,9 @@
 
 @layer components {
   .header-nav-button {
-    @apply hidden h-6 md:inline-flex cursor-pointer hover:scale-125 transition-all duration-100 ease-out;
+    @apply hidden h-6 md:inline-flex cursor-pointer hover:scale-x-110 transition-all duration-100 ease-out;
   }
   .post-button {
-    @apply h-7 hover:scale-125 cursor-pointer transition-all duration-150 ease-out;
+    @apply h-7 hover:scale-110 cursor-pointer transition-all duration-150 ease-out;
   }
 }

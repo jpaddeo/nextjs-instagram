@@ -7,6 +7,7 @@ function Suggestions() {
   useEffect(() => {
     const fakerSuggestions = [...Array(5)].map((_, i) => ({
       ...faker.helpers.contextualCard(),
+      id: i,
     }));
     setSuggestions(fakerSuggestions);
   }, []);
