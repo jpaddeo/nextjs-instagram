@@ -81,7 +81,7 @@ function Post({ id, username, userImg, img, caption }) {
 
   useEffect(() => {
     setHasLiked(
-      likes.findIndex((like) => like.id === session.user?.uid) !== -1
+      likes.findIndex((like) => like.id === session?.user?.uid) !== -1
     );
   }, [likes]);
 
