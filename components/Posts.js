@@ -1,39 +1,37 @@
+import {
+  collection,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from '@firebase/firestore';
+import { useEffect, useState } from 'react';
+import { db } from '../libs/firebase';
+
 import Post from './posts/Post';
 
-const MOCK_POSTS = [
-  {
-    id: 123,
-    username: 'jpaddeo',
-    userImg: 'https://links.papareact.com/3ke',
-    img: 'https://links.papareact.com/3ke',
-    caption: 'Suscribe and destroy the like button',
-  },
-  {
-    id: 124,
-    username: 'jpaddeo',
-    userImg: 'https://links.papareact.com/3ke',
-    img: 'https://links.papareact.com/3ke',
-    caption: 'Suscribe and destroy the like button',
-  },
-  {
-    id: 125,
-    username: 'jpaddeo',
-    userImg: 'https://links.papareact.com/3ke',
-    img: 'https://links.papareact.com/3ke',
-    caption: 'Suscribe and destroy the like button',
-  },
-];
-
 function Posts() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const unsuscribe = onSnapshot(
+      query(collection(db, 'posts'), orderBy('timestamp', 'desc')),
+      (snapshot) => {
+        setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      }
+    );
+    return unsuscribe; // clean up
+  }, [db]);
+
   return (
     <div>
-      {MOCK_POSTS.map((post) => (
+      {posts.map((post) => (
         <Post
           key={post.id}
           id={post.id}
           username={post.username}
-          userImg={post.userImg}
-          img={post.img}
+          userImg={post.profileImg}
+          img={post.image}
           caption={post.caption}
         />
       ))}

@@ -8,10 +8,14 @@ import {
 } from '@heroicons/react/outline';
 import { HomeIcon } from '@heroicons/react/solid';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { useRecoilState } from 'recoil';
+
+import { modalState } from '../../atoms/modal';
 
 function NavButtons() {
   const { data: session } = useSession();
   const router = useRouter();
+  const [open, setOpen] = useRecoilState(modalState);
 
   return (
     <div className='flex items-center justify-end space-x-2'>
@@ -28,7 +32,10 @@ function NavButtons() {
               3
             </div>
           </div>
-          <PlusCircleIcon className='header-nav-button' />
+          <PlusCircleIcon
+            onClick={() => setOpen(!open)}
+            className='header-nav-button'
+          />
           <UserGroupIcon className='header-nav-button' />
           <HeartIcon className='header-nav-button' />
           <img
